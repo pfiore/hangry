@@ -10,6 +10,7 @@
         text-decoration: none;
         background-color: red;
 
+
     }
     .hangry-button span {
         position: relative;
@@ -27,5 +28,5 @@
     }
 
     .hangry-button span:hover {
-        color: black
+        color: black;
     }
