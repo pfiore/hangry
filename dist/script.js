@@ -1,7 +1,9 @@
-navigator.geolocation.getCurrentPosition(function(position) {
-    console.log(position.coords.latitude, ' ', position.coords.longitude);
+function getMyLocation() {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        console.log(position.coords.latitude, ' ', position.coords.longitude);
 
-});
+    });
+}
 
 
 var map;
