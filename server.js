@@ -1,6 +1,10 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var Result = require('./app/models/result');
+
+var mongoose   = require('mongoose');
+mongoose.connect('mongodb://hangrytest:yrgnah666@ds025742.mlab.com:25742/hangrytest');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -22,12 +26,25 @@ router.get('/', function(req, res) {
     res.json({ message: 'yo'});
 });
 
-router.route('/loc')
+// on routes that end in /results
+// ------------------------------
+router.route('/results')
     .post(function(req, res) {
+
+        var result = new Result(); // create new Result instance
+        result.name = req.body.name; // set result name
+
+        // save result and check for errors
+        result.save(function(err) {
+            if (err)
+                res.send(err);
+
+            res.json({ message: 'Result created!' });
+        });
     });
 
 app.use('/api', router);
-app.use(express.static('dist'));
+//app.use(express.static('dist'));
 
 app.listen(port);
-console.log('listening on port ' + port);
+console.log('listening on port', port);
